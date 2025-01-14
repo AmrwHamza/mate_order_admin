@@ -31,6 +31,14 @@ class Api {
         },
         onError: (DioException e, handler) {
           // Handle token refresh logic here if needed
+
+          print('Error occurred: ${e.message}');
+
+          // إذا كانت هناك استجابة تحتوي على تفاصيل الخطأ
+          if (e.response != null) {
+            print('Response status code: ${e.response?.statusCode}');
+            print('Response data: ${e.response?.data}');
+          }
           handler.next(e);
         },
       ),

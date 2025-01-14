@@ -5,22 +5,25 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 // SecureStorage implementation for web
 class SecureStorage {
-  static final _secureStorage = WebStorage();
+  // static final _secureStorage = WebStorage();
 
   static Future<void> setItem(String key, String value) async {
-    await _secureStorage.write(key: key, value: value);
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(key, value);
   }
 
-  static Future<String?> getItem(String key) async {
-    return await _secureStorage.read(key: key);
+ static Future<String?> getItem(String key) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(key);
+  }
+   static Future<void> removeItem(String key) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove(key);
   }
 
-  static Future<void> removeItem(String key) async {
-    await _secureStorage.delete(key: key);
-  }
-
-  static Future<void> clear() async {
-    await _secureStorage.deleteAll();
+   static Future<void> clear() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
   }
 }
 

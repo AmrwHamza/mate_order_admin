@@ -17,10 +17,33 @@ const Color KBackgroundColor = Color(0xffEFFEFB);
 
 // ignore: constant_identifier_names
 const KTransitionDuration = Duration(milliseconds: 250);
-const String base = "http://192.168.0.89:8000";
+const String base = "https://43a6-149-34-244-161.ngrok-free.app";
 const String baseurl = "$base" "/api/";
 const String baseurlImg = '$base/storage/project/';
 
 class SharedPrefKeys {
   static const String userToken = 'userToken';
 }
+
+
+
+Future<void> showCustomDialog({
+  required BuildContext context,
+  required String title,
+  required String content,
+}) {
+  return showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: Text(title),
+      content: Text(content),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Close'),
+        ),
+      ],
+    ),
+  );
+}
+
